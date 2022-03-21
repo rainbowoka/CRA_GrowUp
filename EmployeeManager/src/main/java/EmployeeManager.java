@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -17,22 +18,28 @@ public class EmployeeManager {
 
     public void add(ArrayList<Employee> emps)
     {
+        ArrayList<Employee> validItems = new ArrayList<Employee>();
+
         for(Employee e:emps) {
-            if(isValid(e) == false){
-               return;
+            if(isValid(e)){
+                validItems.add(e);
             }
         }
-        for(String key : indexList) {
-            index.get(key).addAll(emps);
-        }
 
-        restructIndex();
+        for(String key : indexList) {
+            index.get(key).addAll(validItems);
+        }
+        restructIndexs();
     }
 
     protected boolean isValid(Employee e) {
         if (isValidEmpNo(e.employeeNum) == false)
             return false;
         if(isValidName(e.name) == false)
+            return false;
+        if(isValidPhone(e.phoneNum) == false)
+            return false;
+        if(isValidBirthday(e.birthday) == false)
             return false;
 
         return true;
@@ -53,8 +60,31 @@ public class EmployeeManager {
         else
             return false;
     }
+    protected boolean isValidPhone(String phoneNum) {
+        if(phoneNum.split("-").length == 3){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    protected boolean isValidBirthday(String birthday) {
+        if (birthday.length() == 8) {
+            int year = Integer.parseInt(birthday.substring(0,4));
+            int month = Integer.parseInt(birthday.substring(4,6));
+            int day = Integer.parseInt(birthday.substring(6,8));
 
-    private void restructIndex()
+            if(year > 0 && month >= 1 && month <= 12 && day >= 1 && day <= 31)
+                return true;
+            else
+                return false;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private void restructIndexs()
     {
         sortEmployeeNum();
         sortName();
@@ -134,6 +164,38 @@ public class EmployeeManager {
         for(String key : indexList)
             index.get(key).remove(e);
     }
+
+    public void mod(List<Employee> emps, String key, String value)
+    {
+        switch(key)
+        {
+            case "employeeNum":
+                for(Employee e:emps)
+                    e.setEmployeeNum(value);
+                sortEmployeeNum();
+            case "name":
+                for(Employee e:emps)
+                    e.setName(value);
+                sortName();
+            case "cl":
+                for(Employee e:emps)
+                    e.setCl(value);
+                sortCareerLevel();
+            case "phoneNum":
+                for(Employee e:emps)
+                    e.setPhoneNum(value);
+                sortPhoneNum();
+            case "birthday":
+                for(Employee e:emps)
+                    e.setBirthday(value);
+                sortBirthday();
+            case "certi":
+                for(Employee e:emps)
+                    e.setCerti(value);
+                sortCerti();
+        }
+    }
+
 
     public int getLength()
     {
