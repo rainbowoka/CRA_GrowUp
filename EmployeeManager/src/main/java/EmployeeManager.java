@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 public class EmployeeManager {
     public static final String EMPTY = " ";
 
-    private String[] indexList = new String[] {"employeeNum", "name", "name_first", "name_last", "cl", "phoneNum", "phoneNum_middle","phoneNum_last", "birthday", "birthday_yy", "birthday_mm", "birthday_dd", "certi"};
-    private HashMap<String, ArrayList<Employee>> index = new HashMap<>();
+    protected String[] indexList = new String[] {"employeeNum", "name", "name_first", "name_last", "cl", "phoneNum", "phoneNum_middle","phoneNum_last", "birthday", "birthday_yy", "birthday_mm", "birthday_dd", "certi"};
+    protected HashMap<String, ArrayList<Employee>> index = new HashMap<>();
 
     public EmployeeManager()
     {

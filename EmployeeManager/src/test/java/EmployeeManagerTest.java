@@ -2211,9 +2211,28 @@ class EmployeeManagerTest {
 
         em.add(emps);
 
-        System.out.println("Employee 데이터 6건 추가 후 데이터 출력(=6)");
+        System.out.println("Employee 데이터 7건 추가 확인(=7)");
         assertEquals(7, em.getLength());
 
+        System.out.println("Employee 데이터 7건에 대해 정렬 확인(=7)");
+        assertEquals("10000000" , em.index.get("employeeNum").get(0).employeeNum);
+        assertEquals("11000000" , em.index.get("employeeNum").get(1).employeeNum);
+        assertEquals("11000001" , em.index.get("employeeNum").get(2).employeeNum);
+        assertEquals("12000000" , em.index.get("employeeNum").get(3).employeeNum);
+        assertEquals("13000000" , em.index.get("employeeNum").get(4).employeeNum);
+        assertEquals("14000000" , em.index.get("employeeNum").get(5).employeeNum);
+        assertEquals("15000000" , em.index.get("employeeNum").get(6).employeeNum);
+
+        assertEquals("구" , em.index.get("name_last").get(0).name_last);
+        assertEquals("11000000" , em.index.get("name_last").get(0).employeeNum);
+        assertEquals("구" , em.index.get("name_last").get(1).name_last);
+        assertEquals("11000001" , em.index.get("name_last").get(1).employeeNum);
+        assertEquals("박" , em.index.get("name_last").get(2).name_last);
+        assertEquals("이" , em.index.get("name_last").get(3).name_last);
+        assertEquals("장" , em.index.get("name_last").get(4).name_last);
+        assertEquals("최" , em.index.get("name_last").get(5).name_last);
+        assertEquals("허" , em.index.get("name_last").get(6).name_last);
+        
         System.out.println("EmployeeNo의 앞 두자리가 10인 데이터 검색 (=1)");
         var emp_no5 = em.search("employeeNum", e->e.employeeNum.substring(0,2).equals("10"));
         assertEquals(1, emp_no5.stream().count());
@@ -2222,7 +2241,7 @@ class EmployeeManagerTest {
         var emp_phonmdl0001 = em.search("phoneNum_middle", e->e.phoneNum_middle.equals("0001"));
         assertEquals(3, emp_phonmdl0001.stream().count());
 
-        System.out.println("검색된 데이터 삭제 후 데이터 출력(=5)");
+        System.out.println("검색된 데이터 삭제 후 데이터 출력(=6)");
         em.delete(emp_no5.get(0));
         assertEquals(6, em.getLength());
     }
