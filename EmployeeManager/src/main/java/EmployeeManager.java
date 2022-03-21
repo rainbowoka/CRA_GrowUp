@@ -55,7 +55,7 @@ public class EmployeeManager {
     }
     protected boolean isValidName(String name) {
         //중간에 띄워쓰기가 있는 한글,영문
-        if (name==EMPTY || name.matches("[aA-zZ가-힣]+( )[aA-zZ가-힣]+") == true)
+        if (name==EMPTY || name.matches("[A-Z]+( )[A-Z]+") == true)
             return true;
         else
             return false;
@@ -191,12 +191,10 @@ public class EmployeeManager {
     public int getLength()
     {
         long length = (int) index.get(indexList[0]).stream().count();
-
         for(String key : indexList) {
             if (length != index.get(key).stream().count())
                 return -1;
         }
         return (int) length;
     }
-
 }
