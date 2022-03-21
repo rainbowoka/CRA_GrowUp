@@ -2,6 +2,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 public class SearchMangerTest {
@@ -33,15 +37,21 @@ public class SearchMangerTest {
     }
 
     @Test
-    void isExistEmployeeTest(){
-        Assertions.assertEquals(true, searchManager.isExistEmployee(new Employee("name", "홍길동")));
+    void isValidRequestTest(){
+        when(searchManager.isValidRequest("cl", "y")).thenReturn(false);
     }
 
     @Test
-    void getDataKeyListFromEmployeeManagerTest(){
-        Assertions.assertEquals(new String[]{"cl1", "cl2", "cl3", "cl4"}, searchManager.getDataKeyListFromEmployeeManager("cl"));
+    void searchEmployeeTest(){
+        List<String> returnList = Arrays.asList("21000000", "69111111");
+        when(searchManager.searchEmployee("cl", "l", "cl2")).thenReturn(returnList);
+
+        Assertions.assertEquals(returnList, searchManager.searchEmployee("cl", "l", "cl2"));
     }
 
-
+    @Test
+    void isExistEmployeeTest(){
+        Assertions.assertEquals(true, searchManager.isExistEmployee("name", "홍길동"));
+    }
 
 }
