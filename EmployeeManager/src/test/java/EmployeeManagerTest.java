@@ -2198,6 +2198,25 @@ class EmployeeManagerTest {
     }
 
     @Test
+    void ModTest(){
+        EmployeeManager em = new EmployeeManager();
+        ArrayList<Employee> emps = new ArrayList<>();
+        emps.add(new Employee("10000000","KK AA","CL3","010-0001-0001","19900107","ADV"));
+        emps.add(new Employee("13000000","KK BB","CL2","010-0001-0002","19900106","EX"));
+        emps.add(new Employee("11000001","KK CC","CL1","010-0001-0003","19900105","PRO"));
+        emps.add(new Employee("11000000","KK DD","CL1","010-0002-0001","19900104","PRO"));
+        emps.add(new Employee("12000000","KK FF","CL3","010-0002-0001","19900103","EX"));
+        emps.add(new Employee("14000000","GG CC","CL1","010-0003-0008","19900102","ADV"));
+        emps.add(new Employee("15000000","GG BB","CL3","010-0004-0009","19900101","ADV"));
+        em.add(emps);
+
+        var emp_phonmdl0001 = em.search("phoneNum_middle", e->e.phoneNum_middle.equals("0001"));
+        assertEquals(3, emp_phonmdl0001.stream().count());
+
+        em.mod(emp_phonmdl0001, "phoneNum", "010-1000-0001");
+    }
+
+    @Test
     void FullCycleTest() {
         EmployeeManager em = new EmployeeManager();
         ArrayList<Employee> emps = new ArrayList<>();
