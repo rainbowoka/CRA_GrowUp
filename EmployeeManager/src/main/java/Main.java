@@ -8,14 +8,14 @@ public class Main {
         String message;
         Command command;
         String result = "";
-        ParsingManager parsingManager = new ParsingManager();
+        ParsingManager parsingManager = new ParsingManager(",");
         EmployeeManager employeeManager = new EmployeeManager();
 
         while ((message = br.readLine()) != null) {
             //정상적으로 parsing 되지 않을 경우 예외 추가 예정
             command = parsingManager.parseCommand(message);
 
-            //CommandExcutor 실행예정
+            //command 를 이용해 CommandExcutor 실행예정
             result += "\n";
         }
         pw.print(result);

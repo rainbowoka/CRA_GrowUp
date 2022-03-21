@@ -21,7 +21,12 @@ public class ParsingManagerTest {
         when(parsingManager.parseCommand(anyString())).thenReturn(new Command());
 
         Command actual = new Command();
-        assertEquals(actual, parsingManager.parseCommand("1"));
+        assertEquals(actual, parsingManager.parseCommand("SCH,-p, , ,birthday,19810630"));
+    }
+    @Test
+    void isValidTest(){
+        Command command = parsingManager.parseCommand("SCH,-p, , ,birthday,19810630");
+        assertEquals("SCH", command.getName());
     }
 
 }
