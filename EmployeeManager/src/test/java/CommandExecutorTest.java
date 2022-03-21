@@ -43,8 +43,30 @@ public class CommandExecutorTest {
     }
 
     @Test
-    void AddExecutorTest1() {
-        // Input: ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO
+    void AddExecutorOptionTest1() {
+        commandExecutor = new CommandExecutor();
+        commandExecutor.setCommand(new Command(0, "-p"));
+        commandExecutor.getCommand().getOptionListElement(0);
+        assertEquals(true, commandExecutor.getCommand().getOptionListElement(0).getOption().equals("-p"));
+        // Input: ADD,-p, , ,*
+    }
+
+    @Test
+    void AddExecutorOptionTest2() {
+        commandExecutor = new CommandExecutor();
+        commandExecutor.setCommand(new Command(2, "-p"));
+        commandExecutor.getCommand().getOptionListElement(2);
+        assertEquals(false, commandExecutor.getCommand().getOptionListElement(2).getOption().equals("-p"));
+        // Input: ADD, , ,-p,*
+    }
+
+    @Test
+    void AddExecutorOptionTest3() {
+        commandExecutor = new CommandExecutor();
+        commandExecutor.setCommand(new Command(1, "-p"));
+        commandExecutor.getCommand().getOptionListElement(1);
+        assertEquals(false, commandExecutor.getCommand().getOptionListElement(2).getOption().equals("-p"));
+        // Input: ADD, ,-p, ,*
     }
 
     @Test
