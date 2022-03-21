@@ -1,13 +1,13 @@
 public class CommandExecutor {
-    private String command; // Command 변수를 어떻게 처리할지 자료형 확인 후 수정 필요.
+    private Command command;
 
     public CommandExecutor() { }
 
-    public String getCommand() {
+    public Command getCommand() {
         return command;
     }
 
-    public void setCommand(String command) {
+    public void setCommand(Command command) {
         this.command = command;
     }
 
@@ -17,50 +17,37 @@ public class CommandExecutor {
 
 }
 
-
 interface Executor {
-    public boolean execute(String command);
+    public boolean execute(Command command);
 }
 
 class AddExecutor implements Executor{
-    public boolean execute(String command) {
+    public boolean execute(Command command) {
         // 1. Search manager에 query request
         // 2. if request index == null, ADD & return true
         // 3. else return false
-
-        if (command.equals("Hello")){
-            System.out.println("Execute ADD with options");
-            return true;
-        }
-        return false;
+        System.out.println("Execute ADD with options");
+        return true;
     }
 }
 
 class ModExecutor implements Executor{
-    public boolean execute(String command) {
+    public boolean execute(Command command) {
         // 1. Search manager에 query request
         // 2. if request index != null, MOD & return true
         // 3. else return false
-
-        if (command.equals("Hello")){
-            System.out.println("Execute MOD with options");
-            return true;
-        }
-        return false;
+        System.out.println("Execute MOD with options");
+        return true;
     }
 }
 
 class DelExecutor implements Executor{
-    public boolean execute(String command) {
+    public boolean execute(Command command) {
         // 1. Search manager에 query request
         // 2. if request index != null, DEL & return true
         // 3. else return false
-
-        if (command.equals("Hello")){
-            System.out.println("Execute DEL with options");
-            return true;
-        }
-        return false;
+        System.out.println("Execute DEL with options");
+        return true;
     }
 }
 

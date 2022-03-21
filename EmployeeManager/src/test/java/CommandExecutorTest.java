@@ -7,22 +7,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandExecutorTest {
     private CommandExecutor commandExecutor;
+    private Command command;
 
     @Test
     void AddExecutorFuncCallTest() {
         commandExecutor = new CommandExecutor();
-        commandExecutor.setCommand("Hi");
+        commandExecutor.setCommand(command);
 
         Executor addExecutor = new AddExecutor();
 
         boolean res = commandExecutor.execute(addExecutor);
-        assertEquals(false, res);
+        assertEquals(true, res);
     }
 
     @Test
     void ModExecutorFuncCallTest() {
         commandExecutor = new CommandExecutor();
-        commandExecutor.setCommand("Hello");
+        commandExecutor.setCommand(command);
 
         Executor modExecutor = new ModExecutor();
 
@@ -33,7 +34,7 @@ public class CommandExecutorTest {
     @Test
     void DelExecutorFuncCallTest() {
         commandExecutor = new CommandExecutor();
-        commandExecutor.setCommand("Hello");
+        commandExecutor.setCommand(command);
 
         Executor delExecutor = new DelExecutor();
 
