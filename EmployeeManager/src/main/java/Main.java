@@ -2,16 +2,20 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        PrintWriter pw = new PrintWriter("output.txt");
 
-        File file = new File("input_20_20.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String str;
-        ParsingManager parsingManager = new ParsingManager();
+        String message;
         Command command;
         String result = "";
-        PrintWriter pw = new PrintWriter("output.txt");
-        while ((str = br.readLine()) != null) {
-            command = parsingManager.parseCommand(str);
+        ParsingManager parsingManager = new ParsingManager();
+        EmployeeManager employeeManager = new EmployeeManager();
+
+        while ((message = br.readLine()) != null) {
+            //정상적으로 parsing 되지 않을 경우 예외 추가 예정
+            command = parsingManager.parseCommand(message);
+
+            //CommandExcutor 실행예정
             result += "\n";
         }
         pw.print(result);
