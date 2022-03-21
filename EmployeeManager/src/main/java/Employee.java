@@ -1,4 +1,5 @@
 class Employee {
+
     public String employeeNum;
     public String name;
     protected String name_first;
@@ -14,13 +15,20 @@ class Employee {
     public String certi;
 
     public Employee(String employeeNum, String name, String cl, String phoneNum, String birthday, String certi) {
-        this.employeeNum = employeeNum;
-        this.name = name;
-        this.cl = cl;
-        this.phoneNum = phoneNum;
-        this.birthday = birthday;
-        this.certi = certi;
+        setEmployeeNum(employeeNum);
+        setName(name);
+        setCl(cl);
+        setPhoneNum(phoneNum);
+        setBirthday(birthday);
+        setCerti(certi);
+    }
 
+    public void setEmployeeNum(String employeeNum) {
+        this.employeeNum = employeeNum;
+    }
+
+    public void setName(String name) {
+        this.name = name;
         if (name!= EmployeeManager.EMPTY && name.split(" ").length>0){
             this.name_first =name.split(" ")[0];
             this.name_last =name.split(" ")[1];
@@ -29,6 +37,14 @@ class Employee {
             this.name_first =EmployeeManager.EMPTY;
             this.name_last =EmployeeManager.EMPTY;
         }
+    }
+
+    public void setCl(String cl) {
+        this.cl = cl;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
         if (phoneNum != EmployeeManager.EMPTY && phoneNum.split("-").length>2){
             this.phoneNum_middle =phoneNum.split("-")[1];
             this.phoneNum_last =phoneNum.split("-")[2];
@@ -37,7 +53,10 @@ class Employee {
             this.phoneNum_middle =EmployeeManager.EMPTY;
             this.phoneNum_last =EmployeeManager.EMPTY;
         }
+    }
 
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
         if (birthday != EmployeeManager.EMPTY && birthday.length()==8){
             this.birthday_yy =birthday.substring(0,4);
             this.birthday_mm =birthday.substring(4,6);
@@ -49,6 +68,12 @@ class Employee {
             this.birthday_dd =EmployeeManager.EMPTY;
         }
     }
+
+    public void setCerti(String certi) {
+        this.certi = certi;
+    }
+
+
     public String GetObject(String key){
         switch(key){
             case "employeeNum":
