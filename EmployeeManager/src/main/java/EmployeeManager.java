@@ -7,7 +7,9 @@ public class EmployeeManager {
     public static final String EMPTY = " ";
 
     protected String[] indexList = new String[] {"employeeNum", "name", "name_first", "name_last", "cl", "phoneNum", "phoneNum_middle","phoneNum_last", "birthday", "birthday_yy", "birthday_mm", "birthday_dd", "certi"};
-    protected HashMap<String, ArrayList<Employee>> index = new HashMap<>();
+
+    protected static HashMap<String, ArrayList<Employee>> index = new HashMap<>();
+
 
     public EmployeeManager()
     {
@@ -15,6 +17,12 @@ public class EmployeeManager {
             index.put(key, new ArrayList<Employee>());
         }
     }
+
+
+    public static ArrayList<Employee> getHashMap(String key){
+        return index.get(key);
+    }
+
 
     public void add(ArrayList<Employee> emps)
     {
@@ -61,7 +69,8 @@ public class EmployeeManager {
             return false;
     }
     protected boolean isValidPhone(String phoneNum) {
-        if(phoneNum.split("-").length>2){
+        if(phoneNum.split("-").length == 3){
+
             return true;
         }
         else{
@@ -69,10 +78,21 @@ public class EmployeeManager {
         }
     }
     protected boolean isValidBirthday(String birthday) {
-        if (birthday.matches("[0-9][0-9][0-9][0-9][0-1][0-9][0-3][0-9]") == true)
-            return true;
-        else
+
+        if (birthday.length() == 8) {
+            int year = Integer.parseInt(birthday.substring(0,4));
+            int month = Integer.parseInt(birthday.substring(4,6));
+            int day = Integer.parseInt(birthday.substring(6,8));
+
+            if(year > 0 && month >= 1 && month <= 12 && day >= 1 && day <= 31)
+                return true;
+            else
+                return false;
+        }
+        else {
             return false;
+        }
+
     }
 
     private void restructIndexs()
