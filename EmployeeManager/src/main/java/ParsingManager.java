@@ -14,7 +14,7 @@ public class ParsingManager {
         ArrayList<String> fieldList = new ArrayList<>();
 
         for(int i=1;i<=3;i++){
-            optionArrayList.add(new Option(options[i]));
+            optionArrayList.add(new Option(options[i].replace("-", "")));
         }
         for(int i=4;i<options.length;i++){
             fieldList.add(options[i]);

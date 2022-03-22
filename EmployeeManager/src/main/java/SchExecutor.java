@@ -12,11 +12,11 @@ class SchExecutor implements Executor{
             return printStringList;
         }
 
-        if(printOption == "") {
+        if(!printOption.equals("p")) {
             printStringList.add(prefixString + searchedList.size());
         }
         else{
-            for(int i = 0; i<5 || i < searchedList.size(); i++){
+            for(int i = 0; i<5 && i < searchedList.size(); i++){
                 printStringList.add(prefixString + searchedList.get(i).GetObject("employeeNum") + ","
                         + searchedList.get(i).GetObject("name") + ","
                         + searchedList.get(i).GetObject("cl") + ","

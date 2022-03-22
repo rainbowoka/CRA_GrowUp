@@ -51,7 +51,7 @@ public class SearchManager {
         if(index.equals("certi")){
             return (e -> e.certi.equals(value));
         }
-
+        System.out.println("option : " + option);
         throw new RuntimeException();
     }
 

@@ -12,11 +12,11 @@ class DelExecutor implements Executor{
             return printStringList;
         }
 
-        if(printOption == "") {
+        if(!printOption.equals("p")) {
             printStringList.add(prefixString + searchedList.size());
         }
         else{
-            for(int i = 0; i<5 || i < searchedList.size(); i++){
+            for(int i = 0; i < 5 && i < searchedList.size(); i++){
                 printStringList.add(prefixString + searchedList.get(i).GetObject("employeeNum") + ","
                         + searchedList.get(i).GetObject("name") + ","
                         + searchedList.get(i).GetObject("cl") + ","
@@ -37,27 +37,6 @@ class DelExecutor implements Executor{
         String value = command.getFieldList().get(1);
         String printOption = command.getOptionListElement(0).getOption();
         String searchOption = command.getOptionListElement(1).getOption();
-
-        if (searchOption.equals("f"))
-            key = "name_first";
-
-        if (searchOption.equals("l") && key.equals("name"))
-            key = "name_last";
-
-        if (searchOption.equals("m"))
-            key = "phoneNum_middle";
-
-        if (searchOption.equals("l") && key.equals("phoneNum"))
-            key = "phoneNum_last";
-
-        if (searchOption.equals("y") && key.equals("birthday"))
-            key = "birthday_yy";
-
-        if (searchOption.equals("m") && key.equals("birthday"))
-            key = "birthday_mm";
-
-        if (searchOption.equals("d") && key.equals("birthday"))
-            key = "birthday_dd";
 
         List<Employee> searchedList = searchManager.searchEmployee(key, searchOption, value);
         em.delete(searchedList);
