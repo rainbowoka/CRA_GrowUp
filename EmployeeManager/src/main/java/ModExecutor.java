@@ -4,10 +4,7 @@ import java.util.stream.Collectors;
 
 class ModExecutor implements Executor{
     public ArrayList<String> execute(Command command, EmployeeManager em) {
-        System.out.println("Execute MOD with options");
-
         ArrayList<String> printString = new ArrayList<>(1);
-        //SearchManager searchManager = new SearchManager();
 
         List<Employee> empList = null;
 
