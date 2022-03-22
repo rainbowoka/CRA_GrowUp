@@ -16,7 +16,7 @@ public class ParsingManager {
         for(int i=1;i<=3;i++){
             optionArrayList.add(new Option(options[i]));
         }
-        for(int i=4;i<=options.length;i++){
+        for(int i=4;i<options.length;i++){
             fieldList.add(options[i]);
         }
 

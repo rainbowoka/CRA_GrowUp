@@ -20,13 +20,5 @@ public class CommandExecutor {
 }
 
 interface Executor {
-    public ArrayList<String> execute(Command command, EmployeeManager em);
-}
-
-
-class SchExecutor implements Executor{
-    public boolean execute(Command command) {
-        System.out.println("Execute DEL with options");
-        return true;
-    }
+    ArrayList<String> execute(Command command, EmployeeManager em);
 }

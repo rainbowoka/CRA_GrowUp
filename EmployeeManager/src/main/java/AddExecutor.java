@@ -18,7 +18,7 @@ class AddExecutor implements Executor{
             return null;
         }
 
-        ArrayList<Employee> emp = new ArrayList<>()
+        ArrayList<Employee> emp = new ArrayList<Employee>()
                 {{add(new Employee(employeeNum, name, cl, phoneNum, birthday, certi));}};
         em.add(emp);
 
