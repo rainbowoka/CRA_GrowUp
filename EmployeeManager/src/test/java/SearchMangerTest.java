@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -37,21 +38,11 @@ public class SearchMangerTest {
     }
 
     @Test
-    void isValidRequestTest(){
-        when(searchManager.isValidRequest("cl", "y")).thenReturn(false);
-    }
-
-    @Test
     void searchEmployeeTest(){
-        List<String> returnList = Arrays.asList("21000000", "69111111");
-        when(searchManager.searchEmployee("cl", "l", "cl2")).thenReturn(returnList);
+        List<Employee> returnList = Arrays.asList();
+        when(searchManager.searchEmployee("cl", "l", "cl4")).thenReturn(returnList);
 
-        Assertions.assertEquals(returnList, searchManager.searchEmployee("cl", "l", "cl2"));
-    }
-
-    @Test
-    void isExistEmployeeTest(){
-        Assertions.assertEquals(true, searchManager.isExistEmployee("name", "홍길동"));
+        Assertions.assertEquals(Collections.EMPTY_LIST, searchManager.searchEmployee("cl", "l", "cl4"));
     }
 
 }
