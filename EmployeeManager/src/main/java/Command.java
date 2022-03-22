@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Command {
+    private String name;
     private ArrayList<Option> optionList; // for option arguments i.e., -p, -f, -l
     private ArrayList<String> fieldList; // otherwise
 
@@ -22,7 +23,12 @@ public class Command {
             setOptionListElement(idx, opts.get(idx));
         }
     }
-
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
     public ArrayList<Option> getOptionList() {
         return optionList;
     }
