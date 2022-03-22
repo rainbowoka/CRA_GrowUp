@@ -13,43 +13,43 @@ public class SearchManager {
     }
 
     private Predicate<Employee> convertIndexToPredicateWithOption(String index, String option, String value){
-        if(index == "name"){
-            if(option == "f"){
-                return (e -> e.name_first == value);
+        if(index.equals("name")){
+            if(option.equals("f")){
+                return (e -> e.name_first.equals(value));
             }
-            else if(option == "l"){
-                return (e -> e.name_last == value);
+            else if(option.equals("l")){
+                return (e -> e.name_last.equals(value));
             }
-            return (e -> e.name == value);
+            return (e -> e.name.equals(value));
         }
-        if(index == "phoneNum"){
-            if(option == "m"){
-                return (e -> e.phoneNum_middle == value);
+        if(index.equals("phoneNum")){
+            if(option.equals("m")){
+                return (e -> e.phoneNum_middle.equals(value));
             }
-            else if(option == "l"){
-                return (e -> e.phoneNum_last == value);
+            else if(option.equals("l")){
+                return (e -> e.phoneNum_last.equals(value));
             }
         }
-        if(index == "birthday"){
-            if(option == "y"){
-                return (e -> e.birthday_yy == value);
+        if(index.equals("birthday")){
+            if(option.equals("y")){
+                return (e -> e.birthday_yy.equals(value));
             }
-            else if(option == "m"){
-                return (e -> e.birthday_mm == value);
+            else if(option.equals("m")){
+                return (e -> e.birthday_mm.equals(value));
             }
-            else if(option == "d"){
-                return (e -> e.birthday_dd == value);
+            else if(option.equals("d")){
+                return (e -> e.birthday_dd.equals(value));
             }
-            return (e -> e.birthday == value);
+            return (e -> e.birthday.equals(value));
         }
-        if(index == "employeeNum") {
-            return (e -> e.employeeNum == value);
+        if(index.equals("employeeNum")) {
+            return (e -> e.employeeNum.equals(value));
         }
-        if(index == "cl"){
-            return (e -> e.cl == value);
+        if(index.equals("cl")){
+            return (e -> e.cl.equals(value));
         }
-        if(index == "certi"){
-            return (e -> e.certi == value);
+        if(index.equals("certi")){
+            return (e -> e.certi.equals(value));
         }
 
         throw new RuntimeException();
