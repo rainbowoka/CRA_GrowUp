@@ -18,13 +18,13 @@ public class Main {
 
             while ((message = br.readLine()) != null) {
                 command = parsingManager.parseCommand(message);
-                if (command.getName() == "ADD"){
+                if (command.getName().equals("ADD")){
                     executor = new AddExecutor();
                 }
-                else if (command.getName() == "DEL"){
+                else if (command.getName().equals("DEL")){
                     executor = new DelExecutor();
                 }
-                else if (command.getName() == "SCH"){
+                else if (command.getName().equals("SCH")){
                     executor = new SchExecutor();
                 }
                 else {
@@ -33,17 +33,18 @@ public class Main {
 
                 commandExecutor.setCommand(command);
                 resultStringArray = commandExecutor.execute(executor, employeeManager);
-                if(!resultStringArray.isEmpty()){
+                if(resultStringArray != null){
                     for(String resultString : resultStringArray){
                         result += resultString + "\n";
                     }
                 }
+                System.out.println("current result : " + result);
             }
             pw.print(result);
             br.close();
             pw.close();
         }
-        catch (Exception e){
+        catch (IOException e){
             System.out.println(e);
         }
     }

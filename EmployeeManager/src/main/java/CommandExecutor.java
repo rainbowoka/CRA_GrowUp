@@ -20,6 +20,5 @@ public class CommandExecutor {
 }
 
 interface Executor {
-    public ArrayList<String> execute(Command command, EmployeeManager em);
+    ArrayList<String> execute(Command command, EmployeeManager em);
 }
-
