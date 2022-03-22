@@ -15,6 +15,9 @@ public class Main {
             ParsingManager parsingManager = new ParsingManager(",");
             EmployeeManager employeeManager = new EmployeeManager();
             ArrayList<String> resultStringArray;
+            boolean addCommand = true;
+            boolean firstOthers = true;
+            long startTime = System.currentTimeMillis();
 
             while ((message = br.readLine()) != null) {
                 command = parsingManager.parseCommand(message);
@@ -23,14 +26,20 @@ public class Main {
                 }
                 else if (command.getName().equals("DEL")){
                     executor = new DelExecutor();
+                    addCommand = false;
                 }
                 else if (command.getName().equals("SCH")){
                     executor = new SchExecutor();
+                    addCommand = false;
                 }
                 else {
                     executor = new ModExecutor();
+                    addCommand = false;
                 }
-
+                if(!addCommand && firstOthers){
+                    firstOthers = false;
+                    employeeManager.restructIndexs();
+                }
                 commandExecutor.setCommand(command);
                 resultStringArray = commandExecutor.execute(executor, employeeManager);
                 if(resultStringArray != null){
@@ -38,11 +47,11 @@ public class Main {
                         result += resultString + "\n";
                     }
                 }
-                System.out.println("current result : " + result);
             }
             pw.print(result);
             br.close();
             pw.close();
+            System.out.println("elapsedTime(ms) : " + (System.currentTimeMillis() - startTime));
         }
         catch (IOException e){
             System.out.println(e);
