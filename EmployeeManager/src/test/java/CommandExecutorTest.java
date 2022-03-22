@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,8 +18,10 @@ public class CommandExecutorTest {
 
         Executor addExecutor = new AddExecutor();
 
-        boolean res = commandExecutor.execute(addExecutor);
-        assertEquals(true, res);
+        EmployeeManager em = new EmployeeManager();
+
+        ArrayList<String> res = commandExecutor.execute(addExecutor, em);
+        assertEquals(true, res==null);
     }
 
     @Test
@@ -27,7 +31,9 @@ public class CommandExecutorTest {
 
         Executor modExecutor = new ModExecutor();
 
-        boolean res = commandExecutor.execute(modExecutor);
+        EmployeeManager em = new EmployeeManager();
+
+        ArrayList<String> res = commandExecutor.execute(modExecutor, em);
         assertEquals(true, res);
     }
 
@@ -38,7 +44,9 @@ public class CommandExecutorTest {
 
         Executor delExecutor = new DelExecutor();
 
-        boolean res = commandExecutor.execute(delExecutor);
+        EmployeeManager em = new EmployeeManager();
+
+        ArrayList<String> res = commandExecutor.execute(delExecutor, em);
         assertEquals(true, res);
     }
 
