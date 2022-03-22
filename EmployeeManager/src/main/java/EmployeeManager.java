@@ -1,5 +1,7 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,7 @@ public class EmployeeManager {
     }
 
 
-    public void add(ArrayList<Employee> emps)
+    public void add(List<Employee> emps)
     {
         ArrayList<Employee> validItems = new ArrayList<Employee>();
 
@@ -169,10 +171,11 @@ public class EmployeeManager {
         return a;
     }
 
-    public void delete(Employee e)
+    public void delete(List<Employee> emps)
     {
-        for(String key : indexList)
-            index.get(key).remove(e);
+        for(Employee e: emps)
+            for(String key : indexList)
+                index.get(key).remove(e);
     }
 
     public void mod(List<Employee> emps, String key, String value)

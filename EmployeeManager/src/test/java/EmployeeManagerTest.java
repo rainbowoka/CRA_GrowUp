@@ -1,85 +1,108 @@
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EmployeeManagerTest {
 
+    EmployeeManager em = new EmployeeManager();
+
+    @BeforeEach
+    void DataAdd(){
+        List<Employee> emps = new ArrayList<>();
+        emps.add(new Employee("15123099","VXIHXOTH JHOP","CL3","010-3112-2609","19771211","ADV"));
+        emps.add(new Employee("17112609","FB NTAWR","CL4","010-5645-6122","19861203","PRO"));
+        emps.add(new Employee("18115040","TTETHU HBO","CL3","010-4581-2050","20080718","ADV"));
+        emps.add(new Employee("88114052","NQ LVARW","CL4","010-4528-3059","19911021","PRO"));
+        emps.add(new Employee("19129568","SRERLALH HMEF","CL2","010-3091-9521","19640910","PRO"));
+        emps.add(new Employee("17111236","VSID TVO","CL1","010-3669-1077","20120718","PRO"));
+        emps.add(new Employee("18117906","TWU QSOLT","CL4","010-6672-7186","20030413","PRO"));
+        emps.add(new Employee("08123556","WN XV","CL1","010-7986-5047","20100614","PRO"));
+        emps.add(new Employee("02117175","SBILHUT LDEXRI","CL4","010-2814-1699","19950704","ADV"));
+        emps.add(new Employee("03113260","HH LTUPF","CL2","010-5798-5383","19791018","PRO"));
+        emps.add(new Employee("14130827","RPO JK","CL4","010-3231-1698","20090201","ADV"));
+        emps.add(new Employee("01122329","DN WD","CL4","010-7174-5680","20071117","PRO"));
+        emps.add(new Employee("08108827","RTAH VNUP","CL4","010-9031-2726","19780417","ADV"));
+        emps.add(new Employee("85125741","FBAH RTIJ","CL1","010-8900-1478","19780228","ADV"));
+        emps.add(new Employee("08117441","BMU MPOSXU","CL3","010-2703-3153","20010215","ADV"));
+        emps.add(new Employee("10127115","KBU MHU","CL3","010-3284-4054","19660814","ADV"));
+        emps.add(new Employee("12117017","LFIS JJIVL","CL1","010-7914-4067","20120812","PRO"));
+        emps.add(new Employee("11125777","TKOQKIS HC","CL1","010-6734-2289","19991001","PRO"));
+        emps.add(new Employee("11109136","QKAHCEX LTODDO","CL4","010-2627-8566","19640130","PRO"));
+        emps.add(new Employee("05101762","VCUHLE HMU","CL4","010-3988-9289","20030819","PRO"));
+        em.add(emps);
+    }
+
+
+    @Test
+    void AddTest(){
+        assertEquals(20, EmployeeManager.getEmployeeList("employeeNum").stream().count());
+    }
+
+    @Test
+    void SearchTest(){
+        List<Employee> items_phoneNum = em.search("phoneNum_middle", e->e.phoneNum_middle.equals("3284"));
+        assertEquals(1, items_phoneNum.stream().count());
+
+        List<Employee> items_birth = em.search("birthday_mm", e->e.birthday_mm.equals("12"));
+        assertEquals(2, items_birth.stream().count());
+
+        List<Employee> items_birth2 = em.search("birthday_dd", e->e.birthday_dd.equals("04"));
+        assertEquals(1, items_birth2.stream().count());
+        assertEquals("02117175", items_birth2.get(0).employeeNum);
+
+        List<Employee> items_Certi = em.search("certi", e->e.certi.equals("PRO"));
+        assertEquals(12, items_Certi.stream().count());
+
+        List<Employee> items_emp = em.search("employeeNum", e->e.employeeNum.equals("79110836"));
+        assertEquals(0, items_emp.stream().count());
+    }
+
     @Test
     void ModTest(){
-        EmployeeManager em = new EmployeeManager();
-        ArrayList<Employee> emps = new ArrayList<>();
-        emps.add(new Employee("10000000","KK AA","CL3","010-0001-0001","19900107","ADV"));
-        emps.add(new Employee("13000000","KK BB","CL2","010-0001-0002","19900106","EX"));
-        emps.add(new Employee("11000001","KK CC","CL1","010-0001-0003","19900105","PRO"));
-        emps.add(new Employee("11000000","KK DD","CL1","010-0002-0001","19900104","PRO"));
-        emps.add(new Employee("12000000","KK FF","CL3","010-0002-0001","19900103","EX"));
-        emps.add(new Employee("14000000","GG CC","CL1","010-0003-0008","19900102","ADV"));
-        emps.add(new Employee("15000000","GG BB","CL3","010-0004-0009","19900101","ADV"));
-        em.add(emps);
+        List<Employee> items = em.search("name", e->e.name.equals("FB NTAWR"));
+        assertEquals(1, items.stream().count());
+        Employee cloneObj = items.get(0).clone();
 
-        var emp_phonmdl0001 = em.search("phoneNum_middle", e->e.phoneNum_middle.equals("0001"));
-        assertEquals(3, emp_phonmdl0001.stream().count());
+        em.mod(items, "birthday", "20050520");
+        assertEquals("20050520", items.get(0).birthday);
 
-        em.mod(emp_phonmdl0001, "phoneNum", "010-1000-9999");
-        assertEquals(3, em.search("phoneNum", e->e.phoneNum.equals("010-1000-9999")).stream().count());
-
+        List<Employee> re_serachitems = em.search("name", e->e.name.equals("FB NTAWR"));
+        assertEquals("20050520", re_serachitems.get(0).birthday);
+        assertEquals("19861203" , cloneObj.birthday);
     }
 
     @Test
-    void FullCycleTest() {
-        EmployeeManager em = new EmployeeManager();
-        ArrayList<Employee> emps = new ArrayList<>();
-        emps.add(new Employee("10000000","땡땡 허","CL3","010-0001-0001","19900107","ADV"));
-        emps.add(new Employee("13000000","땡일 박","CL2","010-0001-0002","19900106","EX"));
-        emps.add(new Employee("11000001","땡일 구","CL1","010-0001-0003","19900105","PRO"));
-        emps.add(new Employee("11000000","땡일 구","CL1","010-0002-0001","19900104","PRO"));
-        emps.add(new Employee("12000000","땡땡 이","CL3","010-0002-0001","19900103","EX"));
-        emps.add(new Employee("14000000","땡땡 최","CL1","010-0003-0008","19900102","ADV"));
-        emps.add(new Employee("15000000","땡땡 장","CL3","010-0004-0009","19900101","ADV"));
+    void DelTest(){
+        List<Employee> items = em.search("employeeNum", e->e.employeeNum.equals("18115040"));
+        assertEquals(1, items.stream().count());
+        Employee cloneObj = items.get(0).clone();
 
-        em.add(emps);
-
-        System.out.println("Employee 데이터 7건 추가 확인(=7)");
-        assertEquals(7, em.getLength());
-
-        System.out.println("Employee 데이터 7건에 대해 정렬 확인(=7)");
-        assertEquals("10000000" , em.index.get("employeeNum").get(0).employeeNum);
-        assertEquals("11000000" , em.index.get("employeeNum").get(1).employeeNum);
-        assertEquals("11000001" , em.index.get("employeeNum").get(2).employeeNum);
-        assertEquals("12000000" , em.index.get("employeeNum").get(3).employeeNum);
-        assertEquals("13000000" , em.index.get("employeeNum").get(4).employeeNum);
-        assertEquals("14000000" , em.index.get("employeeNum").get(5).employeeNum);
-        assertEquals("15000000" , em.index.get("employeeNum").get(6).employeeNum);
-
-        assertEquals("구" , em.index.get("name_last").get(0).name_last);
-        assertEquals("11000000" , em.index.get("name_last").get(0).employeeNum);
-        assertEquals("구" , em.index.get("name_last").get(1).name_last);
-        assertEquals("11000001" , em.index.get("name_last").get(1).employeeNum);
-        assertEquals("박" , em.index.get("name_last").get(2).name_last);
-        assertEquals("이" , em.index.get("name_last").get(3).name_last);
-        assertEquals("장" , em.index.get("name_last").get(4).name_last);
-        assertEquals("최" , em.index.get("name_last").get(5).name_last);
-        assertEquals("허" , em.index.get("name_last").get(6).name_last);
-        
-        System.out.println("EmployeeNo의 앞 두자리가 10인 데이터 검색 (=1)");
-        var emp_no5 = em.search("employeeNum", e->e.employeeNum.substring(0,2).equals("10"));
-        assertEquals(1, emp_no5.stream().count());
-
-        System.out.println("전화번호의 가운데가 0001인 데이터 검색 (=3)");
-        var emp_phonmdl0001 = em.search("phoneNum_middle", e->e.phoneNum_middle.equals("0001"));
-        assertEquals(3, emp_phonmdl0001.stream().count());
-
-        System.out.println("검색된 데이터 삭제 후 데이터 출력(=6)");
-        em.delete(emp_no5.get(0));
-        assertEquals(6, em.getLength());
+        em.delete(items);
+        assertEquals(19, EmployeeManager.getEmployeeList("employeeNum").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("name").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("name_first").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("name_last").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("cl").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("phoneNum").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("phoneNum_middle").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("phoneNum_last").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("birthday").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("birthday_yy").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("birthday_mm").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("birthday_dd").stream().count());
+        assertEquals(19, EmployeeManager.getEmployeeList("certi").stream().count());
     }
+
+
 
     @Test
     void ValidTest(){
-        EmployeeManager em = new EmployeeManager();
 
         assertEquals(true, em.isValidEmpNo("12131450"));
         assertEquals(true, em.isValidEmpNo("10000000"));
@@ -88,9 +111,9 @@ class EmployeeManagerTest {
         assertEquals(false, em.isValidEmpNo("121314"));
         assertEquals(false, em.isValidEmpNo("121314a4"));
 
-        assertEquals(true, em.isValidName("Hello Choi"));
+        assertEquals(false, em.isValidName("Hello Choi"));
         assertEquals(true, em.isValidName("HELLO CHOI"));
-        assertEquals(true, em.isValidName("ccokdk asdfj"));
+        assertEquals(false, em.isValidName("ccokdk asdfj"));
         assertEquals(false, em.isValidName("HelloChoi"));
 
         assertEquals(true, em.isValidPhone("1990-010-800"));
