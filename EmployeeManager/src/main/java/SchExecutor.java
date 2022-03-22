@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SchExecutor implements Executor{
-    public boolean execute(Command command){
-        return false;
-    }
     private ArrayList<String> makePrintMsg(List<Employee> searchedList, String printOption){
         ArrayList<String> printStringList = new ArrayList<>();
 
