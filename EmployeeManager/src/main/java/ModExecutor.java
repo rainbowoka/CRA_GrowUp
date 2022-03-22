@@ -79,12 +79,11 @@ class ModExecutor implements Executor{
                 printString.add(temp);
             }
 
-            return printString;
         }
-
+        else{
+            printString.add("MOD," + empList.size());
+        }
         em.mod(empList, command.getFieldList().get(2), command.getFieldList().get(3));
-
-        printString.add("MOD," + empList.size());
         return printString;
     }
 }
