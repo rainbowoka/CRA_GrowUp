@@ -4,16 +4,6 @@ import java.util.stream.Collectors;
 
 class ModExecutor implements Executor{
     public ArrayList<String> execute(Command command, EmployeeManager em) {
-        // 1. SearchManager로부터 매칭되는 employee 정보 찾음 (parsing)
-        // 2. if option[0] == "p", 해당 employee의 query 미리 요청
-        // 3. if option[1] == "f", 이름으로 검색
-        // 4. if option[1] == "l" && name, 성으로 검색
-        // 5. if option[1] == "m", 전화번호 중간 자리로 검색
-        // 6. if option[1] == "l" && phoneNum, 전화번호 뒷 자리로 검색
-        // 7. em.mod()
-        // 8. if option[0] == "p", 쿼리 전부 출력, 리턴
-        // 9. MOD,* 리턴
-
         System.out.println("Execute MOD with options");
 
         ArrayList<String> printString = new ArrayList<>(1);
@@ -67,10 +57,14 @@ class ModExecutor implements Executor{
 
         em.mod(empList, command.getFieldList().get(2), command.getFieldList().get(3));
 
+        if (empList.stream().count() == 0) {
+            printString.add("MOD,NONE");
+            return printString;
+        }
 
         if (command.getOptionList().get(0).getOption().equals("p")) {
 
-            for (int i = 0; i < empList.size(); i++) {
+            for (int i = 0; i < 5 && i < empList.size(); i++) {
                 String temp = "MOD," + empList.get(0).GetObject("employeeNum") + "," +
                                        empList.get(0).GetObject("name") + "," +
                                        empList.get(0).GetObject("cl") + "," +
@@ -80,11 +74,6 @@ class ModExecutor implements Executor{
                 printString.add(temp);
             }
 
-            return printString;
-        }
-
-        if (empList.stream().count() == 0) {
-            printString.add("MOD,NONE");
             return printString;
         }
 
