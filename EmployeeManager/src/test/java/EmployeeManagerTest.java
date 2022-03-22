@@ -25,6 +25,7 @@ class EmployeeManagerTest {
 
         em.mod(emp_phonmdl0001, "phoneNum", "010-1000-9999");
         assertEquals(3, em.search("phoneNum", e->e.phoneNum.equals("010-1000-9999")).stream().count());
+
     }
 
     @Test
@@ -82,6 +83,7 @@ class EmployeeManagerTest {
 
         assertEquals(true, em.isValidEmpNo("12131450"));
         assertEquals(true, em.isValidEmpNo("10000000"));
+
         assertEquals(false, em.isValidEmpNo("1213145052"));
         assertEquals(false, em.isValidEmpNo("121314"));
         assertEquals(false, em.isValidEmpNo("121314a4"));
@@ -103,6 +105,7 @@ class EmployeeManagerTest {
         assertEquals(true  , em.isValid(new Employee("10000000","KAD C","CL3","010-0001-0001","19900107","ADV")));
         assertEquals(false  , em.isValid(new Employee("100000001","KAD","1","1","1","1")));
         assertEquals(false  , em.isValid(new Employee("1000000","H","1","1","1","1")));
+
         assertEquals(false  , em.isValid(new Employee("1000000a","1","1","1","1","1")));
     }
 }
