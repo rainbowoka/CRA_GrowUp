@@ -14,8 +14,10 @@ class ModExecutor implements Executor{
         // 8. if option[0] == "p", 쿼리 전부 출력, 리턴
         // 9. MOD,* 리턴
 
+        System.out.println("Execute MOD with options");
+
         ArrayList<String> printString = new ArrayList<>(1);
-        SearchManager searchManager = new SearchManager();
+        //SearchManager searchManager = new SearchManager();
 
         List<Employee> empList = null;
 
@@ -59,10 +61,6 @@ class ModExecutor implements Executor{
             empList = em.search("certi", e->e.certi.equals(command.getFieldList().get(1)));
         }
 
-        if (empList.stream().count() == 0) {
-            return null;
-        }
-
         if (command.getFieldList().get(2).equals("employeeNum")) {
             return null;
         }
@@ -81,54 +79,16 @@ class ModExecutor implements Executor{
                                        empList.get(0).GetObject("certi") + ",";
                 printString.add(temp);
             }
+
+            return printString;
         }
 
+        if (empList.stream().count() == 0) {
+            printString.add("MOD,NONE");
+            return printString;
+        }
 
-
-        // 1. SearchManager로부터 매칭되는 employee 사번 찾음
-//        List<String> searchedEmpNumList = searchManager.searchEmployee(
-//                command.getFieldList().get(0), command.getOptionList().get(1).getOption(), command.getFieldList().get(1));
-//
-//        if (searchedEmpNumList == null) {
-//            return null;
-//        }
-
-//        String option2 = command.getOptionList().get(1).getOption();
-//        String columnName = command.getFieldList().get(0);
-//        List<Employee> queriedEmps = null;
-//
-//        for (int i = 0; i < searchedEmpNumList.size(); i++) {
-//            String temp = searchedEmpNumList.get(i);
-//
-//            // 사번이 temp인 employee 검색
-//            List<Employee> queryEmpNum = em.search("employeeNum", e->e.employeeNum.equals(temp));
-//            queryEmpNum.get(0).GetObject()
-//
-//            switch (option2) {
-//                case "f":
-//                    // 3. if option[1] == "f", 이름으로 검색
-//                    queriedEmps = em.search(columnName, e->e.name.equals(temp));
-//                    break;
-//                case "l":
-//                    // 4. if option[1] == "l" && name, 성으로 검색
-//                    if (command.getFieldList().get(0).equals("name")) {
-//                        // search by family name
-//                        queriedEmps = em.search(columnName, e->e.name_last.equals(""))
-//                    }
-//
-//                    // 6. if option[1] == "l" && phoneNum, 전화번호 뒷 자리로 검색
-//                    if (command.getFieldList().get(0).equals("phoneNum")) {
-//                        // search by phoneNum
-//                    }
-//                    break;
-//                case "m":
-//                    // 5. if option[1] == "m", 전화번호 중간 자리로 검색
-//
-//                    break;
-//            }
-//        }
-
-        System.out.println("Execute MOD with options");
-        return null;
+        printString.add("MOD," + empList.size());
+        return printString;
     }
 }
