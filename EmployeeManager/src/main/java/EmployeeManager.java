@@ -138,11 +138,24 @@ public class EmployeeManager {
         sortObject("certi");
     }
 
-    private int compareTo(String compare1, String compare2){
-        if (compare1.compareTo(compare2) > 0) {
+
+    public String MakeYYYY2EmpNo(String empNo){
+        int yy_EmpNo = Integer.parseInt(empNo.substring(0,2));
+        if(yy_EmpNo > 68)
+            return "19"+empNo;
+        else
+            return "20"+empNo;
+    }
+
+    private int compareToEmpNo(String empNo1, String empNo2){
+
+        String yyyyEmpNo1 = MakeYYYY2EmpNo(empNo1);
+        String yyyyEmpNo2 = MakeYYYY2EmpNo(empNo2);
+
+        if (yyyyEmpNo1.compareTo(yyyyEmpNo2) > 0) {
             return 1;
         }
-        else if (compare1.compareTo(compare2) < 0) {
+        else if (yyyyEmpNo1.compareTo(yyyyEmpNo2) < 0) {
             return -1;
         }
         else
@@ -151,7 +164,7 @@ public class EmployeeManager {
         }
     }
 
-    private int compareTo(String compare1, String compare2, String default1, String default2){
+    private int compareTo(String compare1, String compare2, String empNo1, String empNo2){
         if (compare1.compareTo(compare2) > 0) {
             return 1;
         }
@@ -160,7 +173,7 @@ public class EmployeeManager {
         }
         else
         {
-            return compareTo(default1, default2);
+            return compareToEmpNo(empNo1, empNo2);
         }
     }
 
@@ -186,26 +199,32 @@ public class EmployeeManager {
                 for(Employee e:emps)
                     e.setEmployeeNum(value);
                 sortEmployeeNum();
+                break;
             case "name":
                 for(Employee e:emps)
                     e.setName(value);
                 sortName();
+                break;
             case "cl":
                 for(Employee e:emps)
                     e.setCl(value);
                 sortCareerLevel();
+                break;
             case "phoneNum":
                 for(Employee e:emps)
                     e.setPhoneNum(value);
                 sortPhoneNum();
+                break;
             case "birthday":
                 for(Employee e:emps)
                     e.setBirthday(value);
                 sortBirthday();
+                break;
             case "certi":
                 for(Employee e:emps)
                     e.setCerti(value);
                 sortCerti();
+                break;
         }
     }
 

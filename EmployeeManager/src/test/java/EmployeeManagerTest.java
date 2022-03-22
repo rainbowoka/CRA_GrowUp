@@ -64,6 +64,15 @@ class EmployeeManagerTest {
     }
 
     @Test
+    void empNoFormatChangeTest(){
+        assertEquals("1996000000", em.MakeYYYY2EmpNo("96000000"));
+        assertEquals("2000000000", em.MakeYYYY2EmpNo("00000000"));
+        assertEquals("1969000000", em.MakeYYYY2EmpNo("69000000"));
+        assertEquals("2018000000", em.MakeYYYY2EmpNo("18000000"));
+    }
+
+
+    @Test
     void ModTest(){
         List<Employee> items = em.search("name", e->e.name.equals("FB NTAWR"));
         assertEquals(1, items.stream().count());
