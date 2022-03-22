@@ -7,7 +7,9 @@ public class EmployeeManager {
     public static final String EMPTY = " ";
 
     protected String[] indexList = new String[] {"employeeNum", "name", "name_first", "name_last", "cl", "phoneNum", "phoneNum_middle","phoneNum_last", "birthday", "birthday_yy", "birthday_mm", "birthday_dd", "certi"};
+
     protected static HashMap<String, ArrayList<Employee>> index = new HashMap<>();
+
 
     public EmployeeManager()
     {
@@ -16,9 +18,11 @@ public class EmployeeManager {
         }
     }
 
+
     public static ArrayList<Employee> getHashMap(String key){
         return index.get(key);
     }
+
 
     public void add(ArrayList<Employee> emps)
     {
@@ -66,6 +70,7 @@ public class EmployeeManager {
     }
     protected boolean isValidPhone(String phoneNum) {
         if(phoneNum.split("-").length == 3){
+
             return true;
         }
         else{
@@ -73,6 +78,7 @@ public class EmployeeManager {
         }
     }
     protected boolean isValidBirthday(String birthday) {
+
         if (birthday.length() == 8) {
             int year = Integer.parseInt(birthday.substring(0,4));
             int month = Integer.parseInt(birthday.substring(4,6));
@@ -86,6 +92,7 @@ public class EmployeeManager {
         else {
             return false;
         }
+
     }
 
     private void restructIndexs()
