@@ -1,18 +1,68 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class DelExecutor implements Executor{
-    public ArrayList<String> execute(Command command, EmployeeManager em) {
-        // 1. SearchManager로부터 매칭되는 employee 정보 찾음
-        // 2. if option[0] == "p", 해당 employee의 query 미리 요청
-        // 3. if option[1] == "f", 이름으로 검색
-        // 4. if option[1] == "l" && name, 성으로 검색
-        // 5. if option[1] == "m", 전화번호 중간 자리로 검색
-        // 6. if option[1] == "l" && phoneNum, 전화번호 뒷 자리로 검색
-        // 7. em.mod()
-        // 8. if option[0] == "p", 쿼리 전부 출력, 리턴
-        // 9. DEL,* 리턴
+    private ArrayList<String> makePrintMsg(List<Employee> searchedList, String printOption){
+        ArrayList<String> printStringList = new ArrayList<>();
 
-        System.out.println("Execute DEL with options");
-        return null;
+        String prefixString = "DEL,";
+
+        if(searchedList.size() == 0){
+            printStringList.add(prefixString + "NONE");
+            return printStringList;
+        }
+
+        if(printOption == "") {
+            printStringList.add(prefixString + searchedList.size());
+        }
+        else{
+            for(int i = 0; i<5 || i < searchedList.size(); i++){
+                printStringList.add(prefixString + searchedList.get(i).GetObject("employeeNum") + ","
+                        + searchedList.get(i).GetObject("name") + ","
+                        + searchedList.get(i).GetObject("cl") + ","
+                        + searchedList.get(i).GetObject("phoneNum") + ","
+                        + searchedList.get(i).GetObject("birthday") + ","
+                        + searchedList.get(i).GetObject("certi"));
+            }
+        }
+
+        return printStringList;
+    }
+
+    public ArrayList<String> execute(Command command, EmployeeManager em) {
+        SearchManager searchManager = new SearchManager();
+
+        ArrayList<String> printString;
+        String key = command.getFieldList().get(0);
+        String value = command.getFieldList().get(1);
+        String printOption = command.getOptionListElement(0).getOption();
+        String searchOption = command.getOptionListElement(1).getOption();
+
+        if (searchOption.equals("f"))
+            key = "name_first";
+
+        if (searchOption.equals("l") && key.equals("name"))
+            key = "name_last";
+
+        if (searchOption.equals("m"))
+            key = "phoneNum_middle";
+
+        if (searchOption.equals("l") && key.equals("phoneNum"))
+            key = "phoneNum_last";
+
+        if (searchOption.equals("y") && key.equals("birthday"))
+            key = "birthday_yy";
+
+        if (searchOption.equals("m") && key.equals("birthday"))
+            key = "birthday_mm";
+
+        if (searchOption.equals("d") && key.equals("birthday"))
+            key = "birthday_dd";
+
+        List<Employee> searchedList = searchManager.searchEmployee(key, searchOption, value);
+        em.delete(searchedList);
+        printString = makePrintMsg(searchedList, printOption);
+
+        return printString;
     }
 }
