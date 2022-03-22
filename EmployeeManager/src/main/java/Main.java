@@ -21,10 +21,10 @@ public class Main {
                 if (command.getName() == "ADD"){
                     executor = new AddExecutor();
                 }
-                if (command.getName() == "DEL"){
+                else if (command.getName() == "DEL"){
                     executor = new DelExecutor();
                 }
-                if (command.getName() == "SCH"){
+                else if (command.getName() == "SCH"){
                     executor = new SchExecutor();
                 }
                 else {
