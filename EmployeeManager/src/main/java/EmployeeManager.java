@@ -18,8 +18,7 @@ public class EmployeeManager {
         }
     }
 
-
-    public static ArrayList<Employee> getHashMap(String key){
+    public static List<Employee> getEmployeeList(String key){
         return index.get(key);
     }
 
