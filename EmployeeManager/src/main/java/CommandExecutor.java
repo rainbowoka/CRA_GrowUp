@@ -51,3 +51,10 @@ class DelExecutor implements Executor{
     }
 }
 
+
+class SchExecutor implements Executor{
+    public boolean execute(Command command) {
+        System.out.println("Execute DEL with options");
+        return true;
+    }
+}
