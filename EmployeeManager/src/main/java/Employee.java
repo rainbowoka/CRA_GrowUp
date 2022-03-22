@@ -1,5 +1,4 @@
 class Employee {
-
     public String employeeNum;
     public String name;
     protected String name_first;
@@ -23,13 +22,17 @@ class Employee {
         setCerti(certi);
     }
 
+    public Employee clone(){
+        return new Employee(employeeNum,name,  cl,  phoneNum,  birthday,  certi);
+    }
+
     public void setEmployeeNum(String employeeNum) {
         this.employeeNum = employeeNum;
     }
 
     public void setName(String name) {
         this.name = name;
-        if (name!= EmployeeManager.EMPTY && name.split(" ").length>0){
+        if (name!= EmployeeManager.EMPTY && name.split(" ").length>1){
             this.name_first =name.split(" ")[0];
             this.name_last =name.split(" ")[1];
         }
@@ -106,5 +109,4 @@ class Employee {
                 return " ";
         }
     }
-
 }
