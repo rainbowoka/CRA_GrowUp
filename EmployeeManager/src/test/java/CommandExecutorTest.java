@@ -65,6 +65,7 @@ public class CommandExecutorTest {
         commandExecutor = new CommandExecutor();
         commandExecutor.setCommand(new Command(1, "-p"));
         commandExecutor.getCommand().getOptionListElement(1);
+
         assertEquals(false, commandExecutor.getCommand().getOptionListElement(2).getOption().equals("-p"));
         // Input: ADD, ,-p, ,*
     }
