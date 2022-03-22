@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class CommandExecutor {
     private Command command;
 
@@ -26,7 +28,14 @@ class AddExecutor implements Executor{
         // 1. Search manager에 query request
         // 2. if request index == null, ADD & return true
         // 3. else return false
-        System.out.println("Execute ADD with options");
+//        SearchManager searchManager = new SearchManager();
+//        if (searchManager.isExistEmployee("employeeNum", command.getFieldList().get(0))) {
+//            System.out.println("ADD ERROR! EXISTING EMPLOYEE");
+//            return false;
+//        }
+
+//        em.add(new Employee(pd.getEmployeeNum(), pd.getName(), pd.getCl(), pd.getPhoneNum(), pd.getBirthday(), pd.getCerti()));
+
         return true;
     }
 }
@@ -36,6 +45,14 @@ class ModExecutor implements Executor{
         // 1. Search manager에 query request
         // 2. if request index != null, MOD & return true
         // 3. else return false
+
+//        SearchManager searchManager = new SearchManager();
+//        List<String> employeeList = searchManager.searchEmployee();
+//        if (employeeList.size() == 0) {
+//            System.out.println("MOD ERROR! NO MATCHES FOUND");
+//            return false;
+//        }
+
         System.out.println("Execute MOD with options");
         return true;
     }
