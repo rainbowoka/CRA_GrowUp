@@ -38,7 +38,6 @@ public class EmployeeManager {
         for(String key : indexList) {
             index.get(key).addAll(validItems);
         }
-        restructIndexs();
     }
 
     protected boolean isValid(Employee e) {
@@ -96,7 +95,7 @@ public class EmployeeManager {
 
     }
 
-    private void restructIndexs()
+    public void restructIndexs()
     {
         sortEmployeeNum();
         sortName();
