@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("input.txt"));
-            PrintWriter pw = new PrintWriter("output.txt");
+            BufferedReader br = new BufferedReader(new FileReader(args[0]));
+            PrintWriter pw = new PrintWriter(args[1]);
 
             String message;
             Command command;
