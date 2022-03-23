@@ -36,6 +36,7 @@ class EmployeeManagerTest {
         emps.add(new Employee("11109136","QKAHCEX LTODDO","CL4","010-2627-8566","19640130","PRO"));
         emps.add(new Employee("05101762","VCUHLE HMU","CL4","010-3988-9289","20030819","PRO"));
         em.add(emps);
+        em.restructIndexs();
     }
 
 
@@ -64,6 +65,15 @@ class EmployeeManagerTest {
     }
 
     @Test
+    void SearchTest2(){
+        List<Employee> birthday = em.search("birthday_yy", e->e.birthday_yy.equals("2003"));
+        assertEquals(2, birthday.stream().count());
+
+        assertEquals("05101762",birthday.get(0).employeeNum);
+        assertEquals("18117906",birthday.get(1).employeeNum);
+    }
+
+    @Test
     void empNoFormatChangeTest(){
         assertEquals("1996000000", em.MakeYYYY2EmpNo("96000000"));
         assertEquals("2000000000", em.MakeYYYY2EmpNo("00000000"));
@@ -74,17 +84,18 @@ class EmployeeManagerTest {
 
     @Test
     void ModTest(){
-        List<Employee> items = em.search("name", e->e.name.equals("FB NTAWR"));
-        assertEquals(1, items.stream().count());
+        List<Employee> items = em.search("certi", e->e.certi.equals("ADV"));
+        assertEquals(8, items.stream().count());
         Employee cloneObj = items.get(0).clone();
 
         em.mod(items, "birthday", "20050520");
         assertEquals("20050520", items.get(0).birthday);
+        assertEquals("19780228" , cloneObj.birthday);
 
         List<Employee> re_serachitems = em.search("name", e->e.name.equals("FB NTAWR"));
-        assertEquals("20050520", re_serachitems.get(0).birthday);
-        assertEquals("19861203" , cloneObj.birthday);
+        assertEquals("19861203", re_serachitems.get(0).birthday);
     }
+
 
     @Test
     void DelTest(){
