@@ -59,16 +59,11 @@ public class CommandTest {
     }
 
     @Test
-    void CommandTestThatReturnsOptionList() {
-        command.setOptionListElement(0, "p");
-
-        assertEquals(true, command.getOptionList() instanceof ArrayList<Option>);
-    }
-
-    @Test
     void CommandClassUsage() {
 
-        ArrayList<Option> optionList = new ArrayList<>(2) {{add(new Option("-p")); add(new Option("-f"));}};
+        ArrayList<Option> optionList = new ArrayList<>();
+        optionList.add(new Option("-p"));
+        optionList.add(new Option("-f"));
         ArrayList<String> fieldList = new ArrayList<String>();
 
         fieldList.add("21013070");
