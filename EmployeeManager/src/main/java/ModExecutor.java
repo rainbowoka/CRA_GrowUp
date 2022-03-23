@@ -4,8 +4,6 @@ import java.util.stream.Collectors;
 
 class ModExecutor implements Executor{
     public ArrayList<String> execute(Command command, EmployeeManager em) {
-        System.out.println("Execute MOD with options");
-
         ArrayList<String> printString = new ArrayList<>(1);
 
         List<Employee> empList = null;
@@ -16,10 +14,10 @@ class ModExecutor implements Executor{
 
         if (command.getFieldList().get(0).equals("name")) {
             if (command.getOptionList().get(1).getOption().equals("f")) {
-                empList = em.search("name", e->e.name_first.equals(command.getFieldList().get(1)));
+                empList = em.search("name_first", e->e.name_first.equals(command.getFieldList().get(1)));
             }
             else if (command.getOptionList().get(1).getOption().equals("l")) {
-                empList = em.search("name", e->e.name_last.equals(command.getFieldList().get(1)));
+                empList = em.search("name_last", e->e.name_last.equals(command.getFieldList().get(1)));
             }
             else {
                 empList = em.search("name", e->e.name.equals(command.getFieldList().get(1)));
@@ -32,10 +30,10 @@ class ModExecutor implements Executor{
 
         if (command.getFieldList().get(0).equals("phoneNum")) {
             if (command.getOptionList().get(1).getOption().equals("m")) {
-                empList = em.search("phoneNum", e->e.phoneNum_middle.equals(command.getFieldList().get(1)));
+                empList = em.search("phoneNum_middle", e->e.phoneNum_middle.equals(command.getFieldList().get(1)));
             }
             else if (command.getOptionList().get(1).getOption().equals("l")) {
-                empList = em.search("phoneNum", e->e.phoneNum_last.equals(command.getFieldList().get(1)));
+                empList = em.search("phoneNum_last", e->e.phoneNum_last.equals(command.getFieldList().get(1)));
             }
             else {
                 empList = em.search("phoneNum", e->e.phoneNum.equals(command.getFieldList().get(1)));
@@ -44,13 +42,13 @@ class ModExecutor implements Executor{
 
         if (command.getFieldList().get(0).equals("birthday")) {
             if (command.getOptionList().get(1).getOption().equals("y")) {
-                empList = em.search("birthday", e->e.birthday_yy.equals(command.getFieldList().get(1)));
+                empList = em.search("birthday_yy", e->e.birthday_yy.equals(command.getFieldList().get(1)));
             }
             else if (command.getOptionList().get(1).getOption().equals("m")) {
-                empList = em.search("birthday", e->e.birthday_mm.equals(command.getFieldList().get(1)));
+                empList = em.search("birthday_mm", e->e.birthday_mm.equals(command.getFieldList().get(1)));
             }
             else if (command.getOptionList().get(1).getOption().equals("d")) {
-                empList = em.search("birthday", e->e.birthday_dd.equals(command.getFieldList().get(1)));
+                empList = em.search("birthday_dd", e->e.birthday_dd.equals(command.getFieldList().get(1)));
             }
             else {
                 empList = em.search("birthday", e->e.birthday.equals(command.getFieldList().get(1)));
@@ -81,12 +79,11 @@ class ModExecutor implements Executor{
                 printString.add(temp);
             }
 
-            return printString;
         }
-
+        else{
+            printString.add("MOD," + empList.size());
+        }
         em.mod(empList, command.getFieldList().get(2), command.getFieldList().get(3));
-
-        printString.add("MOD," + empList.size());
         return printString;
     }
 }
